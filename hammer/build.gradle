@@ -1,0 +1,8 @@
+apply plugin: 'war'
+
+dependencies {
+
+	provided "in.mechcloud.piston.core:piston-app-api:$pistonAPIVersion"
+
+}
+

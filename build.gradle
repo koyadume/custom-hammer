@@ -1,0 +1,56 @@
+subprojects {
+    apply plugin: 'eclipse-wtp'
+    apply plugin: 'maven'
+    apply plugin: 'java'
+
+    sourceCompatibility = 1.8
+
+    group = 'in.mechcloud.piston.apps.custom'
+    version = computeVersion()
+    
+    ext {
+        pistonAPIVersion = '3.x.y'
+    }
+
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
+
+    libsDirName = 'package'
+
+    //required for emulating maven's provided scope as gradle java plugin does not provide this configuration
+    configurations {
+        provided
+    }
+     
+    sourceSets {
+        main {
+            compileClasspath += configurations.provided
+        }
+        test {
+            compileClasspath += configurations.provided
+            runtimeClasspath += configurations.provided
+        }
+    }
+
+    //this is to make sure that runtime dependencies are not shown in eclipse
+    eclipse {
+        classpath {
+            plusConfigurations = [ configurations.compile, configurations.provided ]
+        }
+    }
+
+    dependencies {
+        provided 'org.projectlombok:lombok:1.16.6'
+    }
+}
+
+def computeVersion() {
+	File version = file('version') 
+	if(version.exists()) {
+		return version.text
+	}
+    return "invalidVersion"
+} 
+
