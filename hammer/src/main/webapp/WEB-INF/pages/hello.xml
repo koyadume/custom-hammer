@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin:page xmlns="html5" xmlns:plugin="plugin" xmlns:c="core">
+	<plugin:body>
+	    <c:out value="Hello World !!" />
+	</plugin:body>
+</plugin:page>
